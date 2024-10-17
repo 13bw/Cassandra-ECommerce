@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  cassandra:
+    image: cassandra:4.0
+    container_name: cassandra_db
+    environment:
+      - CASSANDRA_CLUSTER_NAME=loja_cluster
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    networks:
+      - cassandra_net
+
+networks:
+  cassandra_net:
+
+volumes:
+  cassandra_data:
